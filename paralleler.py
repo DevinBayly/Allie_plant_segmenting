@@ -6,24 +6,24 @@ import os
 import subprocess as sp
 
 def run_foregrounder(img_name):
-  sp.run(f"python3 lab_foregrounder.py '{img_name}'",shell=True)
+  sp.run(f"python3 foregrounder.py '{img_name}'",shell=True)
 
 images = []
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument("folder",default="./",required=False)
+parser = argparse.ArgumentParser()
+parser.add_argument("folder",default="./",required=False)
 
-# args = parser.parse_args()
+args = parser.parse_args()
 
 segs =[]
 print(os.getcwd())
-for pth,sub,fls in os.walk("./"):
+for pth,sub,fls in os.walk(args.folder):
   for fl in fls:
     if "_segmented" in fl:
       segs.append(fl.replace("_segmented","").lower())
 total = []
 processed  = []
-for pth,sub,fls in os.walk("./"):
+for pth,sub,fls in os.walk(args.folder):
   for fl in fls:
     fl_lower = fl.lower()
     if "jpg" in fl_lower and not "_segmented" in fl_lower:
