@@ -1,3 +1,4 @@
+
 import multiprocessing as mp
 import argparse
 from pathlib import Path
@@ -5,7 +6,7 @@ import os
 import subprocess as sp
 
 def run_foregrounder(img_name):
-  sp.run(f"python3 foregrounder.py '{img_name}'",shell=True)
+  sp.run(f"python3 lab_foregrounder.py '{img_name}'",shell=True)
 
 images = []
 
@@ -33,5 +34,5 @@ for pth,sub,fls in os.walk("./"):
         processed.append(fl_lower)
 
 print("total ", len(total), "processed ",len(processed), len(images),"still to process")
-#with mp.Pool(15) as p:
-#  p.map(run_foregrounder,images)
+with mp.Pool(15) as p:
+  p.map(run_foregrounder,images)
