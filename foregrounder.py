@@ -6,6 +6,7 @@ from PIL import Image
 from pathlib import Path
 import argparse
 import os
+from skimage import io,color
 
 parser = argparse.ArgumentParser("perform image segmentation with python")
 parser.add_argument("fname")
