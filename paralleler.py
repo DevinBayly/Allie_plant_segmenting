@@ -11,7 +11,7 @@ def run_foregrounder(img_name):
 images = []
 
 parser = argparse.ArgumentParser()
-parser.add_argument("folder",default="./",required=False)
+parser.add_argument("folder",default="./")
 
 args = parser.parse_args()
 
