@@ -10,6 +10,10 @@ from skimage import io,color
 
 parser = argparse.ArgumentParser("perform image segmentation with python")
 parser.add_argument("fname")
+parser.add_argument("min")
+parser.add_argument("max")
+
+
 
 args = parser.parse_args()
 pth = Path(args.fname)
@@ -17,8 +21,8 @@ pth = Path(args.fname)
 def procPlant(im):
   hsl = color.rgb2hsv(im)
     #these min max are taken from image editor when a reasonable neighborhood is found
-  min_thresh = 159/255
-  max_thresh = 236/255
+  min_thresh = int(args.min)/255
+  max_thresh = int(args.max)/255
   inverted_hsl = 1-hsl
     # we create a mask where for each pixel we say true or false if it is less than the min thresh or above the max
     # got this part wrong the first time I typed this out.. 
