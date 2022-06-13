@@ -5,7 +5,10 @@ from pathlib import Path
 import os
 import subprocess as sp
 
-def run_foregrounder(img_name,minv,maxv):
+def run_foregrounder(vals):
+  img_name = vals[0]
+  minv = vals[1]
+  maxv = vals[2]
   sp.run(f"python3 foregrounder.py '{img_name}' {minv} {maxv}",shell=True)
 
 images = []
@@ -38,4 +41,4 @@ for pth,sub,fls in os.walk(args.folder):
 
 print("total ", len(total), "processed ",len(processed), len(images),"still to process")
 with mp.Pool(int(args.nproc)) as p:
-  p.map(run_foregrounder,images)
+  p.map(run_foregrounder,[(i,args.minv,args.maxv) for i in images])
