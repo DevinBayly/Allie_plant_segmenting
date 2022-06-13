@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("folder",default="./")
 parser.add_argument("minv",default="159")
 parser.add_argument("maxv",default="236")
-parser.add_argument("num_proc",default="4")
+parser.add_argument("nproc",default="4")
 
 args = parser.parse_args()
 
