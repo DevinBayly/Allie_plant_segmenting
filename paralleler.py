@@ -5,13 +5,16 @@ from pathlib import Path
 import os
 import subprocess as sp
 
-def run_foregrounder(img_name):
-  sp.run(f"python3 foregrounder.py '{img_name}'",shell=True)
+def run_foregrounder(img_name,minv,maxv):
+  sp.run(f"python3 foregrounder.py '{img_name}' {minv} {maxv}",shell=True)
 
 images = []
 
 parser = argparse.ArgumentParser()
 parser.add_argument("folder",default="./")
+parser.add_argument("minv",default="159")
+parser.add_argument("maxv",default="236")
+parser.add_argument("num_proc",default="4")
 
 args = parser.parse_args()
 
@@ -34,5 +37,5 @@ for pth,sub,fls in os.walk(args.folder):
         processed.append(fl_lower)
 
 print("total ", len(total), "processed ",len(processed), len(images),"still to process")
-with mp.Pool(15) as p:
+with mp.Pool(int(args.nproc)) as p:
   p.map(run_foregrounder,images)
