@@ -15,9 +15,9 @@ images = []
 
 parser = argparse.ArgumentParser()
 parser.add_argument("folder",default="./")
-parser.add_argument("minv",default="159",required=False)
-parser.add_argument("maxv",default="236",required=False)
-parser.add_argument("nproc",default="4",required=False)
+parser.add_argument("--minv",default="159",required=False)
+parser.add_argument("--maxv",default="236",required=False)
+parser.add_argument("--nproc",default="4",required=False)
 
 args = parser.parse_args()
 
