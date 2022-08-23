@@ -23,7 +23,7 @@ def procPlant(im):
   lab_scaled = (lab + [0, 128, 128]) / [100, 255, 255]
   values = lab_scaled[:,:,2].flatten()
   topBackground = np.max(lab_scaled[:500,:500,2])
-  mask = (lab_scaled[:,:,2]<.54)
+  mask = (lab_scaled[:,:,2]<args.max)
   masked = im.copy()
   masked[mask] =0
 
@@ -44,6 +44,7 @@ def procPlant(im):
 
 date = Path(f"{pth.parents[1]}/Segmented")
 date.mkdir(exist_ok=True,parents=True)
+print(f"{pth}")
 img = io.imread(pth)
 output = procPlant(img)
 output.save(f"{date.absolute()}/{pth.stem}_segmented.jpg")
