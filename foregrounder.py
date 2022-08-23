@@ -19,19 +19,18 @@ args = parser.parse_args()
 pth = Path(args.fname)
 
 def procPlant(im):
-  hsl = color.rgb2hsv(im)
-    #these min max are taken from image editor when a reasonable neighborhood is found
-  min_thresh = int(args.min)/255
-  max_thresh = int(args.max)/255
-  inverted_hsl = 1-hsl
-    # we create a mask where for each pixel we say true or false if it is less than the min thresh or above the max
-    # got this part wrong the first time I typed this out.. 
-  mask = (inverted_hsl[:,:,0]>max_thresh)+(inverted_hsl[:,:,0]<min_thresh)
+  lab = color.rgb2lab(im)
+  lab_scaled = (lab + [0, 128, 128]) / [100, 255, 255]
+  values = lab_scaled[:,:,2].flatten()
+  topBackground = np.max(lab_scaled[:500,:500,2])
+  mask = (lab_scaled[:,:,2]<.54)
   masked = im.copy()
   masked[mask] =0
-  rmask=im[:,:,0] < 255 *(im[:,:,0]>200)
-  gmask=im[:,:,1] < 146 *(im[:,:,1]> 45)
-  bmask=im[:,:,2] < 22
+
+
+  rmask=masked[:,:,0] < 255 *(masked[:,:,0]>200)
+  gmask=masked[:,:,1] < 146 *(masked[:,:,1]> 45)
+  bmask=masked[:,:,2] < 22
   coords =np.where(rmask*gmask*bmask)
   croppoint = np.min(coords[0])- 40 # magic number, watch out!
 
