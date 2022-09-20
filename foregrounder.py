@@ -1,7 +1,6 @@
 
 import os
 import numpy as np
-from sklearn.mixture import GaussianMixture as GMM
 from PIL import Image
 from pathlib import Path
 import argparse
