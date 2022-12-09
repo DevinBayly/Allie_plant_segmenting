@@ -22,7 +22,7 @@ def procPlant(im):
   lab_scaled = (lab + [0, 128, 128]) / [100, 255, 255]
   values = lab_scaled[:,:,2].flatten()
   topBackground = np.max(lab_scaled[:500,:500,2])
-  mask = (lab_scaled[:,:,2]<int(args.max))
+  mask = (lab_scaled[:,:,2]<int(args.min/255))
   masked = im.copy()
   masked[mask] =0
 
